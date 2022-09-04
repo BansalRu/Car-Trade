@@ -31,7 +31,7 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
             return;
         }
 
-        
+
 
         const connectOptions = {
             wallet, identity: username, discovery: { enabled: true, asLocalhost: true },
@@ -57,13 +57,13 @@ const invokeTransaction = async (channelName, chaincodeName, fcn, args, username
         let message;
         if (fcn === "createCar" || fcn === "createPrivateCarImplicitForOrg1"
             || fcn == "createPrivateCarImplicitForOrg2") {
-            result = await contract.submitTransaction(fcn, args[0], args[1], args[2], args[3], args[4]);
+            result = await contract.submitTransaction(fcn, args[0], args[1], args[2], args[3], args[4], args[5]);
             message = `Successfully added the car asset with key ${args[0]}`
 
         } else if (fcn === "changeCarOwner") {
-            result = await contract.submitTransaction(fcn, args[0], args[1]);
+            result = await contract.submitTransaction(fcn, args[0], args[1], args[2]);
             message = `Successfully changed car owner with key ${args[0]}`
-        } else if (fcn == "createPrivateCar" || fcn =="updatePrivateData") {
+        } else if (fcn == "createPrivateCar" || fcn == "updatePrivateData") {
             console.log(`Transient data is : ${transientData}`)
             let carData = JSON.parse(transientData)
             console.log(`car data is : ${JSON.stringify(carData)}`)
