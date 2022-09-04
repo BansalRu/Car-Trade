@@ -24,7 +24,7 @@ type Car struct {
 	Model  string `json:"model"`
 	Colour string `json:"colour"`
 	Owner  string `json:"owner"`
-	State string `json:"state"`
+	State  string `json:"state"`
 }
 
 type carPrivateDetails struct {
@@ -182,6 +182,7 @@ func (s *SmartContract) createPrivateCar(APIstub shim.ChaincodeStubInterface, ar
 		Color string `json:"color"`
 		Owner string `json:"owner"`
 		Price string `json:"price"`
+		State string `json:"state"`
 		Key   string `json:"key"`
 	}
 	if len(args) != 0 {
@@ -339,7 +340,7 @@ func (s *SmartContract) createCar(APIstub shim.ChaincodeStubInterface, args []st
 		return shim.Error("Incorrect number of arguments. Expecting 5")
 	}
 
-	var car = Car{Make: args[1], Model: args[2], Colour: args[3], Owner: args[4], State : args[5]}
+	var car = Car{Make: args[1], Model: args[2], Colour: args[3], Owner: args[4], State: args[5]}
 
 	carAsBytes, _ := json.Marshal(car)
 	APIstub.PutState(args[0], carAsBytes)
